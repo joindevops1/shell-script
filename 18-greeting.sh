@@ -1,20 +1,22 @@
 #!/bin/bash
 
 NAME=""
-WISHES=""
+WISHES="Good Morning"
 
 USAGE(){
     echo "USGAE:: $(basename $0) -n <name> -w <wishes>"
-    echo "options::"
-    echo " -n, specify the name (mandatory)"
-    echo " -w, specify the wishes.ex, Good morning"
-    echo " -h, Display help and exit"
+    echo "Options::"
+    echo " -n, Specify the name (mandatory)"
+    echo " -w, Specify the wishes. (Optional). Default is Good Morning"
+    echo " -h, Display Help and exit"
 }
 
-while getopt ":n:w:h" opt; do
+while getopts ":n:w:h" opt; do
     case $opt in
-         n)NAME="$OPTARG";;
-         w)WISHES="$OPTARG";;
-         h|*)USER; exit;;
+        n) NAME="$OPTARG";;
+        w) WISHES="$OPTARG";;
+        \?) echo "invalid options: -"$OPTARG"" >&2; USAGE; exit;;
+        :) USAGE; exit;;
+        h) USAGE; exit;;
     esac
-done    
+done
